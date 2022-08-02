@@ -5,7 +5,11 @@
         <div class="item-header" @click="toggle">
           <div class="icon">
             <svg>
-              <use :href="getImageUrl(item.type)"></use>
+              <use
+                href="@/assets/images/sprite.svg#folder"
+                v-if="item.type === 'folder'"
+              ></use>
+              <use v-else href="@/assets/images/sprite.svg#file"></use>
             </svg>
           </div>
           <div v-show="!item.isEditing">
@@ -75,14 +79,10 @@ export default {
         isOpen.value = !isOpen.value;
       }
     };
-    const getImageUrl = (name) => {
-      return new URL(`../assets/images/sprite.svg#${name}`, import.meta.url);
-    };
     return {
       isOpen,
       toggle,
       isFolder,
-      getImageUrl,
       input,
       openEdit,
     };
